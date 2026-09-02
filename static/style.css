@@ -1,0 +1,445 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+
+.background {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #243b75,
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at bottom right,
+            #123d52,
+            transparent 40%
+        ),
+
+        linear-gradient(
+            135deg,
+            #070b18,
+            #10182b,
+            #07121d
+        );
+
+    padding: 50px 20px;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+}
+
+
+/* Header */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+
+    margin-bottom: 35px;
+}
+
+
+.logo {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 35px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+header h1 {
+    font-size: 38px;
+    letter-spacing: 1px;
+}
+
+
+header p {
+    margin-top: 6px;
+    color: #aeb8ca;
+    font-size: 15px;
+}
+
+
+/* Main Card */
+
+.scan-card {
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    border-radius: 25px;
+
+    padding: 40px;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+.scan-card > h2 {
+    text-align: center;
+    font-size: 26px;
+}
+
+
+.subtitle {
+    text-align: center;
+
+    color: #aeb8ca;
+
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+
+/* Input */
+
+.input-area {
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 14px;
+
+    padding: 5px 18px;
+
+    transition: 0.3s;
+}
+
+
+.input-area:focus-within {
+
+    border-color: #5ca9ff;
+
+    box-shadow:
+        0 0 20px rgba(92, 169, 255, 0.15);
+}
+
+
+.input-area span {
+    font-size: 20px;
+}
+
+
+input {
+
+    width: 100%;
+
+    padding: 16px 5px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 16px;
+}
+
+
+input::placeholder {
+    color: #7f899d;
+}
+
+
+/* Button */
+
+button {
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #3578ff,
+        #6955ff
+    );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+
+    box-shadow:
+        0 10px 25px rgba(53, 120, 255, 0.25);
+}
+
+
+button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 30px rgba(53, 120, 255, 0.35);
+}
+
+
+/* Ready Card */
+
+.ready-card {
+
+    margin-top: 30px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.ready-icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+
+.ready-card h3 {
+    font-size: 20px;
+}
+
+
+.ready-card p {
+    color: #9da8bc;
+    margin-top: 8px;
+}
+
+
+/* Result */
+
+.result-card {
+
+    margin-top: 30px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+.result-icon {
+    font-size: 50px;
+}
+
+
+.result-card h2 {
+
+    margin-top: 10px;
+
+    font-size: 28px;
+}
+
+
+.result-message {
+
+    margin-top: 10px;
+
+    color: #aeb8ca;
+}
+
+
+.risk-title {
+
+    margin-top: 25px;
+
+    color: #9da8bc;
+
+    font-size: 14px;
+}
+
+
+.score {
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    margin-top: 5px;
+}
+
+
+/* Risk bar */
+
+.risk-bar {
+
+    width: 100%;
+
+    height: 12px;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    border-radius: 20px;
+
+    margin-top: 15px;
+
+    overflow: hidden;
+}
+
+
+.risk-progress {
+
+    height: 100%;
+
+    border-radius: 20px;
+
+    transition: width 0.8s ease;
+}
+
+
+.safe-progress {
+    background: #20c997;
+}
+
+
+.danger-progress {
+    background: #ff4d67;
+}
+
+
+/* Recommendation */
+
+.recommendation {
+
+    margin-top: 25px;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    text-align: left;
+}
+
+
+.recommendation strong {
+    font-size: 15px;
+}
+
+
+.recommendation p {
+
+    margin-top: 7px;
+
+    color: #aeb8ca;
+
+    line-height: 1.5;
+}
+
+
+/* Footer */
+
+footer {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+    color: #7f899d;
+
+    font-size: 13px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .background {
+        padding: 25px 12px;
+    }
+
+
+    .scan-card {
+        padding: 25px 18px;
+    }
+
+
+    header h1 {
+        font-size: 28px;
+    }
+
+
+    .logo {
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+    }
+
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
