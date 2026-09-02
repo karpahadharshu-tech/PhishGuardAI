@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>PhishGuard AI</title>
 
     <style>
@@ -16,427 +14,444 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: #f4f7fb;
-            color: #172033;
-            min-height: 100vh;
+            background: #f5f7fb;
+            color: #1e293b;
         }
 
-        .container {
-            width: 92%;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        /* ================= HEADER ================= */
-
-        header {
-            background: #ffffff;
-            border-bottom: 1px solid #e5e9f2;
-            padding: 22px 0;
-            margin-bottom: 30px;
-        }
-
-        .header-content {
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 18px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
         }
 
         .logo {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: #172554;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
         }
 
-        .brand h1 {
-            font-size: 25px;
-            color: #111827;
+        .logo span {
+            color: #0f172a;
         }
 
-        .brand p {
-            color: #667085;
-            margin-top: 4px;
-            font-size: 14px;
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .status {
-            background: #ecfdf3;
-            color: #087443;
-            padding: 9px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
+            color: #16a34a;
+            font-size: 14px;
+            font-weight: 600;
         }
 
-        /* ================= STATS ================= */
+        .username {
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 9px 15px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .admin-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .logout-btn {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            font-size: 30px;
+            margin-bottom: 7px;
+            color: #0f172a;
+        }
+
+        .welcome p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        /* Statistics */
 
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 18px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .stat-card {
             background: white;
-            border: 1px solid #e5e9f2;
-            border-radius: 18px;
-            padding: 22px;
-            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.04);
-        }
-
-        .stat-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
         }
 
         .stat-title {
-            color: #667085;
-            font-size: 14px;
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 10px;
         }
 
-        .stat-number {
-            font-size: 30px;
+        .stat-value {
+            font-size: 27px;
             font-weight: bold;
-            margin-top: 10px;
+            color: #0f172a;
         }
 
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-        }
+        /* Scanner */
 
-        .blue {
-            background: #eef2ff;
-            color: #3730a3;
-        }
-
-        .green {
-            background: #ecfdf3;
-            color: #087443;
-        }
-
-        .yellow {
-            background: #fffbeb;
-            color: #a16207;
-        }
-
-        .red {
-            background: #fef2f2;
-            color: #b91c1c;
-        }
-
-        /* ================= MAIN GRID ================= */
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.35fr;
-            gap: 24px;
-            margin-bottom: 30px;
-        }
-
-        .card {
+        .scanner-card {
             background: white;
-            border: 1px solid #e5e9f2;
-            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.04);
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
         }
 
-        .card h2 {
+        .scanner-card h2 {
             font-size: 20px;
             margin-bottom: 8px;
         }
 
-        .card-description {
-            color: #667085;
+        .scanner-card p {
+            color: #64748b;
             font-size: 14px;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
 
-        /* ================= SCAN BOX ================= */
-
-        .scan-box {
-            background: linear-gradient(135deg, #172554, #312e81);
-            color: white;
-            border-radius: 20px;
-            padding: 28px;
-        }
-
-        .scan-box h2 {
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
-
-        .scan-box p {
-            color: #dbeafe;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 22px;
-        }
-
-        .url-input {
-            width: 100%;
-            padding: 15px 16px;
-            border: none;
-            border-radius: 11px;
-            outline: none;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        .check-btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 11px;
-            background: white;
-            color: #172554;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .check-btn:hover {
-            transform: translateY(-2px);
-            background: #eef2ff;
-        }
-
-        /* ================= RESULT ================= */
-
-        .result-card {
-            margin-top: 24px;
-        }
-
-        .result-header {
-            text-align: center;
-            padding: 22px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        .safe-result {
-            background: #ecfdf3;
-            border: 1px solid #bbf7d0;
-        }
-
-        .suspicious-result {
-            background: #fffbeb;
-            border: 1px solid #fde68a;
-        }
-
-        .phishing-result {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-        }
-
-        .result-icon {
-            font-size: 38px;
-            margin-bottom: 8px;
-        }
-
-        .result-header h2 {
-            margin-bottom: 7px;
-        }
-
-        .result-header p {
-            color: #667085;
-            font-size: 14px;
-        }
-
-        .risk-score {
-            text-align: center;
-            margin: 22px 0;
-        }
-
-        .score-number {
-            font-size: 42px;
-            font-weight: bold;
-        }
-
-        .score-label {
-            font-size: 13px;
-            font-weight: bold;
-            color: #667085;
-            margin-top: 5px;
-        }
-
-        /* ================= INDICATORS ================= */
-
-        .section-title {
-            font-size: 16px;
-            margin: 25px 0 14px;
-        }
-
-        .indicator-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+        .scan-form {
+            display: flex;
             gap: 10px;
         }
 
-        .indicator {
-            border: 1px solid #e5e9f2;
+        .scan-form input {
+            flex: 1;
+            padding: 13px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .scan-form input:focus {
+            border-color: #2563eb;
+        }
+
+        .scan-button {
+            background: #2563eb;
+            color: white;
+            padding: 13px 22px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .scan-button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Result */
+
+        .result-card {
+            background: white;
             border-radius: 12px;
-            padding: 13px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .result-safe {
+            border-left: 5px solid #22c55e;
+        }
+
+        .result-suspicious {
+            border-left: 5px solid #f59e0b;
+        }
+
+        .result-phishing {
+            border-left: 5px solid #ef4444;
+        }
+
+        .result-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .result-status {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .result-safe .result-status {
+            color: #16a34a;
+        }
+
+        .result-suspicious .result-status {
+            color: #d97706;
+        }
+
+        .result-phishing .result-status {
+            color: #dc2626;
+        }
+
+        .score {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .result-url {
+            background: #f8fafc;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            word-break: break-all;
+            font-size: 14px;
+        }
+
+        /* Risk Score */
+
+        .risk-score-box {
+            margin-bottom: 22px;
+        }
+
+        .risk-score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .risk-progress {
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .risk-progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .risk-safe {
+            background: #22c55e;
+        }
+
+        .risk-suspicious {
+            background: #f59e0b;
+        }
+
+        .risk-phishing {
+            background: #ef4444;
+        }
+
+        /* Indicators */
+
+        .indicators {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
             font-size: 13px;
         }
 
         .indicator-name {
-            color: #475467;
+            font-weight: 600;
         }
 
         .indicator-status {
+            color: #475569;
+        }
+
+        .reasons-title {
+            font-size: 15px;
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        /* ================= REASONS ================= */
-
-        .reason-list {
-            list-style: none;
-        }
-
-        .reason-list li {
-            background: #f8fafc;
-            border-left: 4px solid #ef4444;
-            padding: 12px 14px;
-            margin-bottom: 9px;
-            border-radius: 7px;
-            color: #475467;
+        .reasons {
+            padding-left: 20px;
+            color: #475569;
             font-size: 14px;
+            line-height: 1.8;
         }
 
-        .safe-message {
-            background: #ecfdf3;
-            border-left: 4px solid #22c55e;
+        /* Overview */
+
+        .section-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
         }
 
-        /* ================= HISTORY ================= */
-
-        .history-card {
-            margin-bottom: 35px;
+        .section-card h2 {
+            font-size: 19px;
+            margin-bottom: 18px;
         }
 
-        .table-wrapper {
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .overview-item {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 9px;
+        }
+
+        .overview-item span {
+            display: block;
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .overview-item strong {
+            font-size: 21px;
+        }
+
+        /* History */
+
+        .table-container {
             overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 700px;
+        }
+
+        th,
+        td {
+            padding: 13px 10px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 13px;
         }
 
         th {
-            text-align: left;
-            padding: 14px;
-            background: #f8fafc;
-            color: #667085;
-            font-size: 12px;
-            text-transform: uppercase;
+            color: #64748b;
+            font-weight: 600;
         }
 
         td {
-            padding: 15px 14px;
-            border-bottom: 1px solid #edf0f5;
-            font-size: 13px;
+            color: #334155;
         }
 
-        .url-cell {
-            max-width: 380px;
-            word-break: break-all;
-            color: #344054;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 11px;
+        .history-safe {
+            color: #16a34a;
             font-weight: bold;
         }
 
-        .badge-safe {
-            background: #ecfdf3;
-            color: #087443;
+        .history-suspicious {
+            color: #d97706;
+            font-weight: bold;
         }
 
-        .badge-suspicious {
-            background: #fffbeb;
-            color: #a16207;
+        .history-phishing {
+            color: #dc2626;
+            font-weight: bold;
         }
 
-        .badge-phishing {
-            background: #fef2f2;
-            color: #b91c1c;
+        .url-cell {
+            max-width: 350px;
+            word-break: break-all;
         }
 
-        /* ================= FOOTER ================= */
+        /* Footer */
 
         footer {
             text-align: center;
-            color: #667085;
+            padding: 25px;
+            color: #94a3b8;
             font-size: 13px;
-            padding: 20px 0 35px;
         }
 
-        /* ================= RESPONSIVE ================= */
+        /* Responsive */
 
         @media (max-width: 900px) {
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .main-grid {
+            .overview-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 600px) {
-            .container {
-                width: 94%;
+        @media (max-width: 650px) {
+            .header {
+                flex-direction: column;
+                gap: 12px;
             }
 
-            .header-content {
-                align-items: flex-start;
-            }
-
-            .status {
-                display: none;
+            .header-right {
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             .stats {
                 grid-template-columns: 1fr;
             }
 
-            .indicator-grid {
+            .scan-form {
+                flex-direction: column;
+            }
+
+            .indicators {
                 grid-template-columns: 1fr;
             }
 
-            .card {
-                padding: 18px;
+            .result-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
             }
         }
     </style>
@@ -444,482 +459,451 @@
 
 <body>
 
-<!-- ================= HEADER ================= -->
+    <!-- Header -->
 
-<header>
-    <div class="container header-content">
+    <header class="header">
 
-        <div class="brand">
-            <div class="logo">🛡️</div>
-
-            <div>
-                <h1>PhishGuard AI</h1>
-                <p>AI-Powered Phishing Detection System</p>
-            </div>
+        <div class="logo">
+            🛡️ PhishGuard <span>AI</span>
         </div>
 
-        <div class="status">
-            ● System Active
-        </div>
-
-    </div>
-</header>
-
-
-<div class="container">
-
-    <!-- ================= STATISTICS ================= -->
-
-    <div class="stats">
-
-        <div class="stat-card">
-            <div class="stat-top">
-                <div>
-                    <div class="stat-title">Total Scans</div>
-                    <div class="stat-number">{{ total_scans }}</div>
-                </div>
-
-                <div class="stat-icon blue">📊</div>
-            </div>
-        </div>
-
-
-        <div class="stat-card">
-            <div class="stat-top">
-                <div>
-                    <div class="stat-title">Safe Links</div>
-                    <div class="stat-number">{{ safe_count }}</div>
-                </div>
-
-                <div class="stat-icon green">✓</div>
-            </div>
-        </div>
-
-
-        <div class="stat-card">
-            <div class="stat-top">
-                <div>
-                    <div class="stat-title">Needs Attention</div>
-                    <div class="stat-number">{{ suspicious_count }}</div>
-                </div>
-
-                <div class="stat-icon yellow">!</div>
-            </div>
-        </div>
-
-
-        <div class="stat-card">
-            <div class="stat-top">
-                <div>
-                    <div class="stat-title">High Risk</div>
-                    <div class="stat-number">{{ phishing_count }}</div>
-                </div>
-
-                <div class="stat-icon red">⚠</div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- ================= MAIN CONTENT ================= -->
-
-    <div class="main-grid">
-
-        <!-- SCAN SECTION -->
-
-        <div>
-
-            <div class="scan-box">
-
-                <h2>🔍 Check a Suspicious Link</h2>
-
-                <p>
-                    Paste a website link below and PhishGuard AI
-                    will analyze it for common phishing indicators.
-                </p>
-
-                <form method="POST">
-
-                    <input
-                        type="text"
-                        name="message"
-                        class="url-input"
-                        placeholder="https://example.com"
-                        value="{{ user_input }}"
-                        required
-                    >
-
-                    <button
-                        type="submit"
-                        class="check-btn"
-                    >
-                        🔍 Check This Link
-                    </button>
-
-                </form>
-
-            </div>
-
-
-            {% if result %}
-
-            <!-- RESULT CARD -->
-
-            <div class="card result-card">
-
-                {% if result == "SAFE" %}
-
-                <div class="result-header safe-result">
-
-                    <div class="result-icon">🟢</div>
-
-                    <h2>THIS LINK LOOKS SAFE</h2>
-
-                    <p>
-                        We didn't find any obvious warning signs
-                        in this link.
-                    </p>
-
-                </div>
-
-                {% elif result == "SUSPICIOUS" %}
-
-                <div class="result-header suspicious-result">
-
-                    <div class="result-icon">🟡</div>
-
-                    <h2>BE CAREFUL WITH THIS LINK</h2>
-
-                    <p>
-                        We found some warning signs that you
-                        should pay attention to.
-                    </p>
-
-                </div>
-
-                {% else %}
-
-                <div class="result-header phishing-result">
-
-                    <div class="result-icon">🔴</div>
-
-                    <h2>HIGH RISK — POSSIBLE PHISHING</h2>
-
-                    <p>
-                        This link shows several signs commonly
-                        associated with phishing.
-                    </p>
-
-                </div>
-
-                {% endif %}
-
-
-                <!-- SCORE -->
-
-                <div class="risk-score">
-
-                    <div class="score-number">
-                        {{ score }}/100
-                    </div>
-
-                    <div class="score-label">
-
-                        {% if result == "SAFE" %}
-                            🟢 LOW RISK
-                        {% elif result == "SUSPICIOUS" %}
-                            🟡 MEDIUM RISK
-                        {% else %}
-                            🔴 HIGH RISK
-                        {% endif %}
-
-                    </div>
-
-                </div>
-
-
-                <!-- INDICATORS -->
-
-                {% if indicators %}
-
-                <h3 class="section-title">
-                    🔍 What We Checked
-                </h3>
-
-                <div class="indicator-grid">
-
-                    {% for indicator in indicators %}
-
-                    <div class="indicator">
-
-                        <span class="indicator-name">
-                            {{ indicator.icon }}
-                            {{ indicator.name }}
-                        </span>
-
-                        <span class="indicator-status">
-                            {{ indicator.status }}
-                        </span>
-
-                    </div>
-
-                    {% endfor %}
-
-                </div>
-
-                {% endif %}
-
-
-                <!-- REASONS -->
-
-                {% if reasons %}
-
-                <h3 class="section-title">
-                    {% if result == "SAFE" %}
-                        💡 What should you do?
-                    {% else %}
-                        ⚠️ Why should you be careful?
-                    {% endif %}
-                </h3>
-
-                <ul class="reason-list">
-
-                    {% for reason in reasons %}
-
-                    <li
-                        {% if result == "SAFE" %}
-                            class="safe-message"
-                        {% endif %}
-                    >
-                        {{ reason }}
-                    </li>
-
-                    {% endfor %}
-
-                </ul>
-
-                {% endif %}
-
-            </div>
-
+        <div class="header-right">
+
+            <span class="status">
+                ● System Active
+            </span>
+
+            <span class="username">
+                👤 {{ username }}
+            </span>
+
+            {% if role == "admin" %}
+                <a href="{{ url_for('admin') }}" class="btn admin-btn">
+                    Admin Dashboard
+                </a>
             {% endif %}
 
+            <a href="{{ url_for('logout') }}" class="btn logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <!-- Welcome -->
+
+        <div class="welcome">
+            <h1>Phishing URL Detection</h1>
+            <p>
+                Analyze suspicious URLs using AI-powered security analysis.
+            </p>
         </div>
 
 
-        <!-- OVERVIEW -->
+        <!-- Statistics -->
 
-        <div class="card">
+        <div class="stats">
 
-            <h2>📊 Scan Overview</h2>
+            <div class="stat-card">
+                <div class="stat-title">
+                    Total Scans
+                </div>
 
-            <p class="card-description">
-                A quick look at the links checked by PhishGuard AI.
+                <div class="stat-value">
+                    {{ statistics.total_scans }}
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-title">
+                    Safe Links
+                </div>
+
+                <div class="stat-value">
+                    {{ statistics.safe_urls }}
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-title">
+                    Needs Attention
+                </div>
+
+                <div class="stat-value">
+                    {{ statistics.suspicious_urls }}
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-title">
+                    High Risk
+                </div>
+
+                <div class="stat-value">
+                    {{ statistics.high_risk_urls }}
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Scanner -->
+
+        <div class="scanner-card">
+
+            <h2>
+                🔍 Scan a URL
+            </h2>
+
+            <p>
+                Enter a website URL below to check whether it is safe or potentially dangerous.
             </p>
 
+            <form method="POST" class="scan-form">
 
-            <div class="indicator-grid">
+                <input
+                    type="text"
+                    name="url"
+                    placeholder="https://example.com"
+                    required
+                >
 
-                <div class="indicator">
-                    <span class="indicator-name">
-                        🟢 Safe Links
-                    </span>
+                <button type="submit" class="scan-button">
+                    Analyze URL
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Result -->
+
+        {% if result %}
+
+        <div class="result-card
+            {% if result == 'SAFE' %}
+                result-safe
+            {% elif result == 'SUSPICIOUS' %}
+                result-suspicious
+            {% else %}
+                result-phishing
+            {% endif %}">
+
+            <div class="result-header">
+
+                <div class="result-status">
+
+                    {% if result == 'SAFE' %}
+                        🟢 SAFE
+                    {% elif result == 'SUSPICIOUS' %}
+                        🟡 NEEDS ATTENTION
+                    {% else %}
+                        🔴 HIGH RISK
+                    {% endif %}
+
+                </div>
+
+                <div class="score">
+                    Risk Score: {{ score }}/100
+                </div>
+
+            </div>
+
+
+            <div class="result-url">
+
+                <strong>
+                    Checked URL:
+                </strong>
+
+                <br>
+
+                {{ checked_url }}
+
+            </div>
+
+
+            <!-- Risk Score Progress Bar -->
+
+            <div class="risk-score-box">
+
+                <div class="risk-score-header">
 
                     <strong>
-                        {{ safe_count }}
+                        Risk Score
                     </strong>
+
+                    <strong>
+                        {{ score }}/100
+                    </strong>
+
                 </div>
 
 
-                <div class="indicator">
-                    <span class="indicator-name">
-                        🟡 Needs Attention
-                    </span>
+                <div class="risk-progress">
 
-                    <strong>
-                        {{ suspicious_count }}
-                    </strong>
+                    <div
+                        class="risk-progress-bar
+                        {% if result == 'SAFE' %}
+                            risk-safe
+                        {% elif result == 'SUSPICIOUS' %}
+                            risk-suspicious
+                        {% else %}
+                            risk-phishing
+                        {% endif %}"
+                        style="width: {{ score }}%;">
+                    </div>
+
                 </div>
 
+            </div>
+
+
+            <!-- Security Indicators -->
+
+            <h3 style="margin-bottom: 12px; font-size: 15px;">
+
+                🔎 Security Indicators
+
+            </h3>
+
+
+            <div class="indicators">
+
+                {% for indicator in indicators %}
 
                 <div class="indicator">
+
                     <span class="indicator-name">
-                        🔴 High Risk
+
+                    
+                        {{ indicator.name }}
+
                     </span>
 
-                    <strong>
-                        {{ phishing_count }}
-                    </strong>
+                    <span class="indicator-status">
+
+                        {{ indicator.status }}
+
+                    </span>
+
                 </div>
 
+                {% endfor %}
 
-                <div class="indicator">
-                    <span class="indicator-name">
-                        📊 Total Scans
+            </div>
+
+
+            <!-- Analysis -->
+
+            <div class="reasons-title">
+
+                💡 Analysis
+
+            </div>
+
+
+            <ul class="reasons">
+
+                {% for reason in reasons %}
+
+                <li>
+                    {{ reason }}
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- Security Overview -->
+
+        <div class="section-card">
+
+            <h2>
+                📊 Security Overview
+            </h2>
+
+
+            <div class="overview-grid">
+
+                <div class="overview-item">
+
+                    <span>
+                        Total Scans
                     </span>
 
                     <strong>
                         {{ total_scans }}
                     </strong>
+
+                </div>
+
+
+                <div class="overview-item">
+
+                    <span>
+                        Safe URLs
+                    </span>
+
+                    <strong>
+                        {{ safe_count }}
+                    </strong>
+
+                </div>
+
+
+                <div class="overview-item">
+
+                    <span>
+                        High Risk URLs
+                    </span>
+
+                    <strong>
+                        {{ phishing_count }}
+                    </strong>
+
                 </div>
 
             </div>
 
+        </div>
 
-            <h3 class="section-title">
-                🛡️ Protection Status
-            </h3>
 
-            <div class="indicator">
+        <!-- Recent Scan History -->
 
-                <span class="indicator-name">
-                    PhishGuard AI Engine
-                </span>
+        <div class="section-card">
 
-                <span class="indicator-status">
-                    🟢 ACTIVE
-                </span>
+            <h2>
+                🕘 Recent Scan History
+            </h2>
 
-            </div>
 
-            <div class="indicator" style="margin-top:10px;">
+            <div class="table-container">
 
-                <span class="indicator-name">
-                    Machine Learning Model
-                </span>
+                <table>
 
-                <span class="indicator-status">
-                    🤖 READY
-                </span>
+                    <thead>
 
-            </div>
+                        <tr>
 
-            <div class="indicator" style="margin-top:10px;">
+                            <th>
+                                URL
+                            </th>
 
-                <span class="indicator-name">
-                    Database
-                </span>
+                            <th>
+                                Result
+                            </th>
 
-                <span class="indicator-status">
-                    🟢 CONNECTED
-                </span>
+                            <th>
+                                Score
+                            </th>
+
+                            <th>
+                                Time
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% if history %}
+
+                            {% for scan in history %}
+
+                            <tr>
+
+                                <td class="url-cell">
+                                    {{ scan.url }}
+                                </td>
+
+
+                                <td>
+
+                                    {% if scan.result == 'SAFE' %}
+
+                                        <span class="history-safe">
+                                            🟢 SAFE
+                                        </span>
+
+                                    {% elif scan.result == 'SUSPICIOUS' %}
+
+                                        <span class="history-suspicious">
+                                            🟡 NEEDS ATTENTION
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="history-phishing">
+                                            🔴 HIGH RISK
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+                                    {{ scan.score }}/100
+                                </td>
+
+
+                                <td>
+                                    {{ scan.scan_time }}
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <tr>
+
+                                <td colspan="4" style="text-align: center; padding: 25px; color: #94a3b8;">
+
+                                    No scan history yet.
+
+                                </td>
+
+                            </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
 
             </div>
 
         </div>
 
-    </div>
+    </main>
 
 
-    <!-- ================= HISTORY ================= -->
+    <!-- Footer -->
 
-    <div class="card history-card">
+    <footer>
 
-        <h2>🕘 Recent Scan History</h2>
+        PhishGuard AI © 2026 |
+        AI-Powered Phishing Detection System
 
-        <p class="card-description">
-            Your recently checked website links.
-        </p>
-
-
-        <div class="table-wrapper">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-                        <th>Website Link</th>
-                        <th>Result</th>
-                        <th>Risk</th>
-                        <th>Checked At</th>
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                    {% for scan in scan_history %}
-
-                    <tr>
-
-                        <td class="url-cell">
-                            {{ scan.url }}
-                        </td>
-
-
-                        <td>
-
-                            {% if scan.result == "SAFE" %}
-
-                                <span class="badge badge-safe">
-                                    🟢 SAFE
-                                </span>
-
-                            {% elif scan.result == "SUSPICIOUS" %}
-
-                                <span class="badge badge-suspicious">
-                                    🟡 NEEDS ATTENTION
-                                </span>
-
-                            {% else %}
-
-                                <span class="badge badge-phishing">
-                                    🔴 HIGH RISK
-                                </span>
-
-                            {% endif %}
-
-                        </td>
-
-
-                        <td>
-                            <strong>
-                                {{ scan.score }}/100
-                            </strong>
-                        </td>
-
-
-                        <td>
-                            {{ scan.time }}
-                        </td>
-
-                    </tr>
-
-                    {% else %}
-
-                    <tr>
-
-                        <td colspan="4" style="text-align:center; padding:30px;">
-                            No scan history yet.
-                        </td>
-
-                    </tr>
-
-                    {% endfor %}
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    🛡️ <strong>PhishGuard AI</strong>
-    • AI-Powered Link Safety Checker
-
-</footer>
+    </footer>
 
 </body>
 </html>
-
