@@ -1,4 +1,3 @@
-
 from flask import (
     Flask,
     render_template,
@@ -55,8 +54,11 @@ print("MODEL CLASSES:", model.classes_)
 # =========================================================
 
 def get_db_connection():
+
     connection = sqlite3.connect(DATABASE_FILE)
+
     connection.row_factory = sqlite3.Row
+
     return connection
 
 
@@ -67,6 +69,7 @@ def get_db_connection():
 def init_database():
 
     connection = get_db_connection()
+
     cursor = connection.cursor()
 
     # -----------------------------------------------------
@@ -75,10 +78,15 @@ def init_database():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
+
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+
             username TEXT UNIQUE NOT NULL,
+
             password TEXT NOT NULL,
+
             role TEXT NOT NULL DEFAULT 'user'
+
         )
     """)
 
@@ -88,11 +96,17 @@ def init_database():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS scan_history (
+
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+
             url TEXT NOT NULL,
+
             result TEXT NOT NULL,
+
             score INTEGER NOT NULL,
+
             scan_time TEXT NOT NULL
+
         )
     """)
 
@@ -104,7 +118,10 @@ def init_database():
         "PRAGMA table_info(scan_history)"
     ).fetchall()
 
-    column_names = [column["name"] for column in columns]
+    column_names = [
+        column["name"]
+        for column in columns
+    ]
 
     if "user_id" not in column_names:
 
@@ -139,6 +156,7 @@ def init_database():
         ))
 
     connection.commit()
+
     connection.close()
 
 
@@ -378,9 +396,7 @@ def extract_features(url):
         for word in suspicious_words
     )
 
-    features[
-        "suspicious_keyword_count"
-    ] = keyword_count
+    features["suspicious_keyword_count"] = keyword_count
 
     # -----------------------------------------------------
     # RETURN FEATURES IN MODEL ORDER
@@ -416,7 +432,6 @@ def save_scan(
         )
         VALUES (?, ?, ?, ?, ?)
     """, (
-
         url,
         result,
         score,
@@ -424,10 +439,10 @@ def save_scan(
             "%Y-%m-%d %H:%M:%S"
         ),
         user_id
-
     ))
 
     connection.commit()
+
     connection.close()
 
 
@@ -526,18 +541,24 @@ def get_security_indicators(url):
     if parsed.scheme.lower() == "https":
 
         indicators.append({
+
             "name": "HTTPS enabled",
+
             "status": "PASS"
+
         })
 
     else:
 
         indicators.append({
+
             "name": "HTTPS enabled",
+
             "status": "WARNING"
+
         })
 
-    # IP address
+    # IP ADDRESS
 
     hostname = parsed.hostname or ""
 
@@ -547,47 +568,65 @@ def get_security_indicators(url):
     ):
 
         indicators.append({
+
             "name": "IP address detected",
+
             "status": "WARNING"
+
         })
 
     else:
 
         indicators.append({
+
             "name": "Domain name detected",
+
             "status": "PASS"
+
         })
 
-    # Suspicious characters
+    # SUSPICIOUS CHARACTERS
 
     if "@" in url:
 
         indicators.append({
+
             "name": "Suspicious @ symbol",
+
             "status": "WARNING"
+
         })
 
     else:
 
         indicators.append({
+
             "name": "No @ symbol",
+
             "status": "PASS"
+
         })
 
-    # URL length
+    # URL LENGTH
 
     if len(url) > 100:
 
         indicators.append({
+
             "name": "Long URL",
+
             "status": "WARNING"
+
         })
 
     else:
 
         indicators.append({
+
             "name": "URL length normal",
+
             "status": "PASS"
+
         })
 
     return indicators
@@ -686,11 +725,13 @@ def get_analysis_reasons(url):
 def home():
 
     result = None
+
     score = None
 
     checked_url = ""
 
     indicators = []
+
     reasons = []
 
     user_id = session["user_id"]
@@ -714,7 +755,7 @@ def home():
             try:
 
                 # -------------------------------------------------
-                # Add scheme if missing
+                # ADD SCHEME IF MISSING
                 # -------------------------------------------------
 
                 if not checked_url.lower().startswith(
@@ -727,7 +768,7 @@ def home():
                     )
 
                 # -------------------------------------------------
-                # Extract features
+                # EXTRACT FEATURES
                 # -------------------------------------------------
 
                 features = extract_features(
@@ -735,7 +776,7 @@ def home():
                 )
 
                 # -------------------------------------------------
-                # Create DataFrame using exact feature names
+                # CREATE DATAFRAME
                 # -------------------------------------------------
 
                 X = pd.DataFrame(
@@ -744,9 +785,8 @@ def home():
                 )
 
                 # -------------------------------------------------
-                # ML Prediction
+                # ML PREDICTION
                 #
-                # Dataset mapping:
                 # 0 = PHISHING
                 # 1 = LEGITIMATE
                 # -------------------------------------------------
@@ -810,8 +850,6 @@ def home():
 
                 # -------------------------------------------------
                 # PHISHING SCORE
-                #
-                # Class 0 = PHISHING
                 # -------------------------------------------------
 
                 class_0_index = list(
@@ -880,6 +918,7 @@ def home():
     )
 
     return render_template(
+
         "index.html",
 
         result=result,
@@ -895,6 +934,7 @@ def home():
         history=history,
 
         statistics=statistics
+
     )
 
 
@@ -960,14 +1000,13 @@ def register():
             (username, password, role)
             VALUES (?, ?, ?)
         """, (
-
             username,
             hashed_password,
             "user"
-
         ))
 
         connection.commit()
+
         connection.close()
 
         flash(
@@ -1078,10 +1117,23 @@ def admin():
     connection = get_db_connection()
 
     # -----------------------------------------------------
+    # ALL REGISTERED USERS
+    # -----------------------------------------------------
+
+    users = connection.execute("""
+        SELECT
+            id,
+            username,
+            role
+        FROM users
+        ORDER BY id ASC
+    """).fetchall()
+
+    # -----------------------------------------------------
     # ALL SCAN HISTORY
     # -----------------------------------------------------
 
-    history = connection.execute("""
+    scan_history = connection.execute("""
         SELECT
             scan_history.*,
             users.username
@@ -1120,24 +1172,19 @@ def admin():
 
     connection.close()
 
-    statistics = {
-
-        "total_scans": total_scans,
-
-        "safe_urls": safe_count,
-
-        "suspicious_urls": suspicious_count,
-
-        "high_risk_urls": phishing_count
-
-    }
+    # -----------------------------------------------------
+    # SEND DATA TO ADMIN TEMPLATE
+    # -----------------------------------------------------
 
     return render_template(
+
         "admin.html",
 
-        history=history,
+        users=users,
 
-        statistics=statistics,
+        scan_history=scan_history,
+
+        username=session.get("username"),
 
         total_scans=total_scans,
 
@@ -1146,6 +1193,7 @@ def admin():
         suspicious_count=suspicious_count,
 
         phishing_count=phishing_count
+
     )
 
 
@@ -1160,4 +1208,3 @@ if __name__ == "__main__":
     app.run(
         debug=True
     )
-
