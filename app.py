@@ -148,6 +148,7 @@ def init_database():
         cursor.execute("""
             INSERT INTO users
             (username, password, role)
+
             VALUES (?, ?, ?)
         """, (
             "admin",
@@ -159,6 +160,8 @@ def init_database():
 
     connection.close()
 
+    print("DATABASE INITIALIZED SUCCESSFULLY")
+
 
 # =========================================================
 # LOGIN REQUIRED DECORATOR
@@ -167,6 +170,7 @@ def init_database():
 def login_required(function):
 
     @wraps(function)
+
     def decorated_function(*args, **kwargs):
 
         if "user_id" not in session:
@@ -192,6 +196,7 @@ def login_required(function):
 def admin_required(function):
 
     @wraps(function)
+
     def decorated_function(*args, **kwargs):
 
         if "user_id" not in session:
@@ -430,15 +435,22 @@ def save_scan(
             scan_time,
             user_id
         )
+
         VALUES (?, ?, ?, ?, ?)
     """, (
+
         url,
+
         result,
+
         score,
+
         datetime.datetime.now().strftime(
             "%Y-%m-%d %H:%M:%S"
         ),
+
         user_id
+
     ))
 
     connection.commit()
@@ -536,7 +548,9 @@ def get_security_indicators(url):
 
     indicators = []
 
+    # -----------------------------------------------------
     # HTTPS
+    # -----------------------------------------------------
 
     if parsed.scheme.lower() == "https":
 
@@ -558,7 +572,9 @@ def get_security_indicators(url):
 
         })
 
+    # -----------------------------------------------------
     # IP ADDRESS
+    # -----------------------------------------------------
 
     hostname = parsed.hostname or ""
 
@@ -585,7 +601,9 @@ def get_security_indicators(url):
 
         })
 
+    # -----------------------------------------------------
     # SUSPICIOUS CHARACTERS
+    # -----------------------------------------------------
 
     if "@" in url:
 
@@ -607,7 +625,9 @@ def get_security_indicators(url):
 
         })
 
+    # -----------------------------------------------------
     # URL LENGTH
+    # -----------------------------------------------------
 
     if len(url) > 100:
 
@@ -666,7 +686,9 @@ def get_analysis_reasons(url):
     found_words = [
 
         word
+
         for word in suspicious_words
+
         if word in lower_url
 
     ]
@@ -799,7 +821,9 @@ def home():
                 # DEBUG INFORMATION
                 # -------------------------------------------------
 
-                print("\n========================================")
+                print(
+                    "\n========================================"
+                )
 
                 print(
                     "SCANNED URL:",
@@ -918,7 +942,6 @@ def home():
     )
 
     return render_template(
-
         "index.html",
 
         result=result,
@@ -934,7 +957,6 @@ def home():
         history=history,
 
         statistics=statistics
-
     )
 
 
@@ -998,11 +1020,16 @@ def register():
         connection.execute("""
             INSERT INTO users
             (username, password, role)
+
             VALUES (?, ?, ?)
         """, (
+
             username,
+
             hashed_password,
+
             "user"
+
         ))
 
         connection.commit()
@@ -1193,8 +1220,23 @@ def admin():
         suspicious_count=suspicious_count,
 
         phishing_count=phishing_count
-
     )
+
+
+# =========================================================
+# INITIALIZE DATABASE
+# =========================================================
+#
+# IMPORTANT:
+# This must be OUTSIDE the __main__ block.
+#
+# Render uses:
+# gunicorn app:app
+#
+# Therefore app.py is imported and __name__ is not "__main__".
+# =========================================================
+
+init_database()
 
 
 # =========================================================
@@ -1202,8 +1244,6 @@ def admin():
 # =========================================================
 
 if __name__ == "__main__":
-
-    init_database()
 
     app.run(
         debug=True
